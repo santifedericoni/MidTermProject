@@ -1,4 +1,4 @@
-// load .env data into process.env
+// loads environment variables from the .env file into process.env
 require('dotenv').config();
 
 // other dependencies
