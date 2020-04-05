@@ -9,12 +9,10 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+const db         = require('./db/index');
 
-// PG database client/connection setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
-db.connect();
+// Not sure if we need to .connect() the pool
+// db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -32,13 +30,16 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
-const homePage = require("./routes/homePage");
-const createPoll = require("./routes/createPoll");
-const results = require("./routes/results");
-const votePage = require("./routes/votePage");
-const oldPolls = require("./routes/oldPolls");
+const homePage    = require("./routes/homePage");
+const createPoll  = require("./routes/createPoll");
+const results     = require("./routes/results");
+const votePage    = require("./routes/votePage");
+const oldPolls    = require("./routes/oldPolls");
 
-const widgetsRoutes = require("./routes/widgets");
+// Seperated API Routes for each Table
+const usersQueries    = require("./routes/apiRoutes/users");
+const pollsQueries    = require("./routes/apiRoutes/polls");
+const choicesQueries  = require("./routes/apiRoutes/choices");
 
 // Mount all resource routes
 app.use("/createPoll", createPoll());
@@ -47,9 +48,12 @@ app.use("/votePage", votePage());
 app.use("/results", results());
 app.use("/", homePage());
 
-app.use("/api/widgets", widgetsRoutes(db));
+// Mount all API routes
+app.use("/api/users", usersQueries(db));
+app.use("/api/polls", pollsQueries(db));
+app.use("/api/choices", choicesQueries(db));
 
-
+// Start server
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
