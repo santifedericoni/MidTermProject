@@ -23,5 +23,25 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.post("/", (req, res) => {
+
+    const pollTitle = req.body.pollTitle;
+    const values = [1, pollTitle];
+    let query = `
+    INSERT INTO polls (user_id, title, date_created, completed)
+    VALUES ($1, $2, NOW(), false) RETURNING *;
+    `;
+     db.query(query, values)
+      .then(data => {
+        console.log('Poll was succesfull');
+      })
+      .catch (err => {
+        res
+        .status(500)
+        .json({ error: err.message });
+      });
+  });
+
   return router;
 };
