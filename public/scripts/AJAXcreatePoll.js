@@ -114,10 +114,9 @@
 <input type="submit" value="Submit"> */
 
 const createMovieOption = (number) => {
-  console.log('createMovieOption');
   const markup = `
   <label>Option ${number}</label>
-  <input type="text"></input>
+  <input type="text" name="option${number}"></input>
   <br><br>
   `;
   return markup;
@@ -133,4 +132,32 @@ $(document).ready(function() {
     number += 1;
     $("container").append($option);
   });
+
+  $("form").submit(function(event) {
+    event.preventDefault;
+
+    const pollTitle = $("#poll-title").val();
+
+    const movieChoices = [];
+    $("container input").each(function() {
+        movieChoices.push($(this).val());
+    });
+
+
+    $.post("/api/polls", { pollTitle }, function (data, status) {
+      console.log('Hello');
+
+      // $.post("/api/choices, ")
+
+    });
+
+
+
+
+
+
+   });
+
 });
+
+

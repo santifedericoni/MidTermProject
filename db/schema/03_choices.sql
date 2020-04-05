@@ -6,6 +6,7 @@ CREATE TABLE choices (
   poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255),
+  trailerURLS VARCHAR(255),
   points INTEGER
 )
 
