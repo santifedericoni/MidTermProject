@@ -127,11 +127,10 @@ const createMovieOption = (number) => {
 $(document).ready(function() {
   let number = 3;
 
-  $("form").submit(function(event) {
+  $("#add-option").click(function(event) {
     event.preventDefault();
     const $option = createMovieOption(number);
     number += 1;
     $("container").append($option);
   });
-
 });
