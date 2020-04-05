@@ -97,7 +97,7 @@
 // });
 
 
-{/* <title>Create Poll</title>
+/* <title>Create Poll</title>
 <label>Title</label>
 <input type="text" id="fname" name="fname"><br><br>
 <label>Option 1</label>
@@ -111,34 +111,27 @@
 <label>Option 5</label>
 <input type="text" id="option5" name="option5"><br><br>
 <input type="submit" value="Add Movie">
-<input type="submit" value="Submit"> */}
+<input type="submit" value="Submit"> */
+
+const createMovieOption = (number) => {
+  console.log('createMovieOption');
+  const markup = `
+  <label>Option ${number}</label>
+  <input type="text"></input>
+  <br><br>
+  `;
+  return markup;
+};
 
 
 $(document).ready(function() {
-  console.log('hola');
+  let number = 3;
 
-  $(".add-option").submit(function(event) {
-    console.log('submitadd');
+  $("form").submit(function(event) {
     event.preventDefault();
-
-    //We need to add buttons
-
-    let number = 2;
     const $option = createMovieOption(number);
-    $("form").append($option);
-
-
-    const createMovieOption = (number) => {
-      console.log('createMovieOption');
-      number += 1;
-      const markup = `
-      <label>Option ${number}</label>
-      <input> type="text" </input>
-      <br><br>
-      `;
-      return markup;
-    };
-
+    number += 1;
+    $("container").append($option);
   });
 
 });
