@@ -9,11 +9,16 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    const values = ['alan@gmail.com'];
+    db.query(`
+      SELECT * FROM users
+      WHERE email = $1;
+    `, values)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const user = data.rows[0];
+        res.json({ user });
       })
       .catch(err => {
         res
@@ -22,5 +27,7 @@ module.exports = (db) => {
           db.end();
       });
   });
+
+
   return router;
 };
