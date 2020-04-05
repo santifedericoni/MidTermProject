@@ -112,32 +112,25 @@
 <input type="text" id="option5" name="option5"><br><br>
 <input type="submit" value="Add Movie">
 <input type="submit" value="Submit"> */
+
 const createMovieOption = (number) => {
   console.log('createMovieOption');
   const markup = `
   <label>Option ${number}</label>
-  <input></input>
+  <input type="text"></input>
   <br><br>
   `;
   return markup;
 };
 
+
 $(document).ready(function() {
-  console.log('hola');
-  let number = 2;
+  let number = 3;
 
-  $("form").submit(function(event) {
-    console.log('submitadd');
+  $("#add-option").click(function(event) {
     event.preventDefault();
-
-    //We need to add buttons
-
     const $option = createMovieOption(number);
-    $("form").append($option);
-
-
-
-
+    number += 1;
+    $("container").append($option);
   });
-
 });
