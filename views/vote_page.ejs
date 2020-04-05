@@ -1,20 +1,74 @@
 <!DOCTYPE html>
+<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+<script type = "text/javascript">
+
+$(document).ready(function() {
+
+  var dragSrcEl = null;
+
+  function handleDragStart(e) {
+    dragSrcEl = this;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+  }
+
+  function handleDragOver(e) {
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+  }
+
+  function handleDragEnter(e) {
+    this.classList.add('over');
+  }
+
+  function handleDragLeave(e) {
+    this.classList.remove('over');
+  }
+
+function handleDrop(e) {
+  if (e.stopPropagation) {
+    e.stopPropagation();
+  }
+  if (dragSrcEl != this) {
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+  }
+  return false;
+}
+  function handleDragEnd(e) {
+    [].forEach.call(cols, function (col) {
+      col.classList.remove('over');
+    });
+  }
+
+  var cols = document.querySelectorAll('#columns .column');
+  [].forEach.call(cols, function(col) {
+    col.addEventListener('dragstart', handleDragStart, false);
+    col.addEventListener('dragenter', handleDragEnter, false)
+    col.addEventListener('dragover', handleDragOver, false);
+    col.addEventListener('dragleave', handleDragLeave, false);
+    col.addEventListener('drop', handleDrop, false);
+    col.addEventListener('dragend', handleDragEnd, false);
+  });
+});
+
+
+
+</script>
 <html lang="en">
   <head>
       <title>MovideWar</title>
-  </head>
+      <link rel="stylesheet" href="/styles/votePage.css" type="text/css" />
+    </head>
   <body>
-    <input type="text" id="fname" name="fname"><br><br>
-    <label>points - Option 1</label>
-    <input type="text" id="option1" name="option1"><br><br>
-    <label>points - Option 2</label>
-    <input type="text" id="option2" name="option2"><br><br>
-    <label>points - Option 3</label>
-    <input type="text" id="option3" name="option3"><br><br>
-    <label>points - Option 4</label>
-    <input type="text" id="option4" name="option4"><br><br>
-    <label>points - Option 5</label>
-    <input type="text" id="option5" name="option5"><br><br>
-    <input type="submit" value="Submit">
+    <div id="columns">
+      <div class="column" draggable="true"><header>Star Wars</header></div>
+      <div class="column" draggable="true"><header>LOTR</header></div>
+      <div class="column" draggable="true"><header>Pulp Fiction</header></div>
+    </div>
   </body>
 </html>
