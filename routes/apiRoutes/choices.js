@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const movieTrailer = require('movie-trailer');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -16,5 +17,11 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+  router.post("/", (req, res) => {
+    console.log(req.body);
+  });
+
   return router;
 };
