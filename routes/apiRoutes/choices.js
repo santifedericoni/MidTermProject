@@ -61,6 +61,7 @@ module.exports = (db) => {
         })
       })
     };
+    res.send('Choices have been created');
   });
   return router;
 };
