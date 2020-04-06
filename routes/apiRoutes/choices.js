@@ -23,17 +23,21 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // { poll_id: '7', movieChoices: [ 'Jurrasic Park', 'Excalibur' ] }
 
-    movieTrailer( req.body.movieChoices[0] )
-    .then(response => {
-      console.log(response);
-    })
-    .catch( console.error )
+    movieTrailer(req.body.movieChoices[0])
+      .then(response => {
+        console.log(response);
+      })
+      .catch(console.error);
 
-    movieInfo (req.body.movieChoices[0])
-    .then(response => {
-      console.log(response.overview);
-    })
-    .catch( console.error )
+    movieInfo(req.body.movieChoices[0])
+
+
+      for (movieChoice)
+
+      .then(response => {
+        console.log(response.overview);
+      })
+      .catch(console.error);
 
 
   });

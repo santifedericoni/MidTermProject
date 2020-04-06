@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
 
 
@@ -33,16 +34,10 @@ $(document).ready(function() {
     $.post("/api/polls", { pollTitle }, function(data) {
 
 
-      console.log(data.id);
-      console.log(movieChoices);
-
       const choicesObj = {
         poll_id: data.id,
         movieChoices
       };
-
-
-
       $.post("/api/choices", choicesObj);
     });
 
