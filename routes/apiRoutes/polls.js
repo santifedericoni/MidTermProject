@@ -36,7 +36,7 @@ module.exports = (db) => {
      db.query(query, values)
       .then(data => {
         const newPoll = data.rows[0];
-        res.json({newPoll});
+        res.send(newPoll);
       })
       .catch (err => {
         res

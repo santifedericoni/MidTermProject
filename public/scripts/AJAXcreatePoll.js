@@ -26,8 +26,8 @@ $(document).ready(function() {
 
   });
 
-  $("#create-poll").click(function(event) {
-    event.preventDefault;
+  $("form").submit(function(event) {
+    event.preventDefault();
 
     const pollTitle = $("#poll-title").val();
     const movieChoices = [];
@@ -37,6 +37,8 @@ $(document).ready(function() {
 
 
     $.post("/api/polls", { pollTitle }, function(data) {
+
+      console.log(data);
 
       let JSONMovieChoices = JSON.stringify(movieChoices);
 
