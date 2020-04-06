@@ -25,6 +25,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
+    // console.log(req.body);
 
     const pollTitle = req.body.pollTitle;
     const values = [1, pollTitle];
@@ -34,7 +35,8 @@ module.exports = (db) => {
     `;
      db.query(query, values)
       .then(data => {
-        console.log('Poll was succesfull');
+        const newPoll = data.rows[0];
+        res.json({newPoll});
       })
       .catch (err => {
         res
