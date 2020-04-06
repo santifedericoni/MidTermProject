@@ -19,11 +19,6 @@ $(document).ready(function() {
     const $option = createMovieOption(number);
     number += 1;
     $("container").append($option);
-
-    // $.getJSON('/api/polls', function(result) {
-    //   console.log(result);
-    // });
-
   });
 
   $("form").submit(function(event) {
@@ -35,16 +30,20 @@ $(document).ready(function() {
       movieChoices.push($(this).val());
     });
 
-
     $.post("/api/polls", { pollTitle }, function(data) {
 
-      console.log(data);
 
-      let JSONMovieChoices = JSON.stringify(movieChoices);
+      console.log(data.id);
+      console.log(movieChoices);
 
-      $.post("/api/choices", { JSONMovieChoices });
+      const choicesObj = {
+        poll_id: data.id,
+        movieChoices
+      };
 
 
+
+      $.post("/api/choices", choicesObj);
     });
 
   });

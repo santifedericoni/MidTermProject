@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const movieTrailer = require('movie-trailer');
+const movieInfo = require('movie-info');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -20,7 +21,21 @@ module.exports = (db) => {
 
 
   router.post("/", (req, res) => {
-    console.log(req.body);
+    // { poll_id: '7', movieChoices: [ 'Jurrasic Park', 'Excalibur' ] }
+
+    movieTrailer( req.body.movieChoices[0] )
+    .then(response => {
+      console.log(response);
+    })
+    .catch( console.error )
+
+    movieInfo (req.body.movieChoices[0])
+    .then(response => {
+      console.log(response.overview);
+    })
+    .catch( console.error )
+
+
   });
 
   return router;
