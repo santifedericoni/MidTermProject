@@ -6,6 +6,7 @@ const createMovieOption = () => {
   <div class="column" draggable="true"><header>LOTR</header></div>
   <div class="column" draggable="true"><header>Pulp Fiction</header></div>
   <div class="column" draggable="true"><header>La La Land</header></div>
+  <div class="column" draggable="true"><header>Godfather</header></div>
   `;
   return markup;
 };
