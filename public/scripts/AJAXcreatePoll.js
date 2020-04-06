@@ -41,9 +41,8 @@ $(document).ready(function() {
         movieChoices
       };
 
-
-
       $.post("/api/choices", choicesObj);
+
     });
 
   });

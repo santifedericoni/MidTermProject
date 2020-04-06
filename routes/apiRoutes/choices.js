@@ -3,6 +3,8 @@ const router  = express.Router();
 const movieTrailer = require('movie-trailer');
 const movieInfo = require('movie-info');
 
+
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     let query = `SELECT * FROM choices`;
@@ -23,20 +25,42 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // { poll_id: '7', movieChoices: [ 'Jurrasic Park', 'Excalibur' ] }
 
-    movieTrailer( req.body.movieChoices[0] )
-    .then(response => {
-      console.log(response);
-    })
-    .catch( console.error )
+    for (let movieChoice of req.body.movieChoices) {
 
-    movieInfo (req.body.movieChoices[0])
-    .then(response => {
-      console.log(response.overview);
-    })
-    .catch( console.error )
+      let trailer;
+      let description;
 
-
+      movieTrailer(movieChoice)
+      .then(response => {
+        trailer = response;
+        return;
+      })
+      .then(response => {
+        movieInfo(movieChoice)
+        .then(response => {
+          description = response.overview;
+          return;
+        })
+        .then(response => {
+          let values = [req.body.poll_id, movieChoice, description, trailer];
+          let query = `
+          INSERT INTO choices (poll_id, title, description, trailerURLS)
+          VALUES ($1, $2, $3, $4) RETURNING *;
+          `;
+          db.query(query, values)
+          .then(data => {
+            console.log(data.rows[0]);
+            return;
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+              return;
+          });
+        })
+      })
+    };
   });
-
   return router;
 };
