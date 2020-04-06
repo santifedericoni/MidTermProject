@@ -34,13 +34,20 @@ const createNewPoll = () => {
 
 $(document).ready(function() {
   let number = 3;
+  let user_id;
 
   $(".email-input button").click(function(event) {
     event.preventDefault();
     let email = $("#email").val();
     console.log(email);
     $.get("/api/users", {email: email}, function(data) {
-      console.log(data);
+      if (data.id) {
+        user_id = data.id;
+      } else {
+        $.post("api/users", {email: email}, function(data) {
+         user_id = data.id;
+        });
+      }
     });
 
     const $pollForm = createNewPoll();
@@ -63,7 +70,7 @@ $(document).ready(function() {
       movieChoices.push($(this).val());
     });
 
-    $.post("/api/polls", { pollTitle }, function(data) {
+    $.post("/api/polls", { pollTitle, user_id }, function(data) {
       const choicesObj = {
         poll_id: data.id,
         movieChoices
