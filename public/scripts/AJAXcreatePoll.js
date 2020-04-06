@@ -140,7 +140,7 @@ $(document).ready(function() {
 
     const movieChoices = [];
     $("container input").each(function() {
-        movieChoices.push($(this).val());
+      movieChoices.push($(this).val());
     });
 
 
@@ -156,7 +156,7 @@ $(document).ready(function() {
 
 
 
-   });
+  });
 
 });
 

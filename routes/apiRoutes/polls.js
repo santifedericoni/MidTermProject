@@ -1,3 +1,4 @@
+/* eslint-disable func-call-spacing */
 /*
  * All routes for Widgets are defined here
  * Since this file is loaded in server.js into api/widgets,
@@ -32,14 +33,14 @@ module.exports = (db) => {
     INSERT INTO polls (user_id, title, date_created, completed)
     VALUES ($1, $2, NOW(), false) RETURNING *;
     `;
-     db.query(query, values)
+    db.query(query, values)
       .then(data => {
         console.log('Poll was succesfull');
       })
       .catch (err => {
         res
-        .status(500)
-        .json({ error: err.message });
+          .status(500)
+          .json({ error: err.message });
       });
   });
 
