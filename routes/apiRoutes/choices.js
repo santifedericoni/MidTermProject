@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const router  = express.Router();
 const movieTrailer = require('movie-trailer');
@@ -31,36 +32,36 @@ module.exports = (db) => {
       let description;
 
       movieTrailer(movieChoice)
-      .then(response => {
-        trailer = response;
-        return;
-      })
-      .then(response => {
-        movieInfo(movieChoice)
         .then(response => {
-          description = response.overview;
+          trailer = response;
           return;
         })
         .then(response => {
-          let values = [req.body.poll_id, movieChoice, description, trailer];
-          let query = `
-          INSERT INTO choices (poll_id, title, description, trailerURLS)
-          VALUES ($1, $2, $3, $4) RETURNING *;
-          `;
-          db.query(query, values)
-          .then(data => {
-            console.log(data.rows[0]);
-            return;
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
+          movieInfo(movieChoice)
+            .then(response => {
+              description = response.overview;
               return;
-          });
-        })
-      })
-    };
+            })
+            .then(response => {
+              let values = [req.body.poll_id, movieChoice, description, trailer];
+              let query = `
+            INSERT INTO choices (poll_id, title, description, trailerURLS)
+            VALUES ($1, $2, $3, $4) RETURNING *;
+            `;
+              db.query(query, values)
+                .then(data => {
+                  console.log(data.rows[0]);
+                  return;
+                })
+                .catch(err => {
+                  res
+                    .status(500)
+                    .json({ error: err.message });
+                  return;
+                });
+            });
+        });
+    }
     res.send('Choices have been created');
   });
   return router;

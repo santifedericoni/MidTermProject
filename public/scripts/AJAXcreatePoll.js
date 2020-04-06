@@ -38,10 +38,6 @@ $(document).ready(function() {
         poll_id: data.id,
         movieChoices
       };
-<<<<<<< HEAD
-=======
-
->>>>>>> ad38c014f0c42782f3ff5d6cb2cd06f603e71454
       $.post("/api/choices", choicesObj);
 
     });
