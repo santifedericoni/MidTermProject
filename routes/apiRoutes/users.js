@@ -11,20 +11,19 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    const values = ['alan@gmail.com'];
+    const values = [req.query.email];
     db.query(`
       SELECT * FROM users
       WHERE email = $1;
     `, values)
       .then(data => {
         const user = data.rows[0];
-        res.json({ user });
+        res.send(user);
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
-        db.end();
       });
   });
 
