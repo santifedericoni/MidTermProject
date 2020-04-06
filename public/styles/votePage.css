@@ -1,0 +1,101 @@
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+.column {
+  position: relative;
+  top: 50%;
+  left: 50%;
+
+  margin: -70px 0 0 -170px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  width: 350px;
+  border: 2px solid #666666;
+  background-color: #72261b;
+  margin-right: 5px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px #000;
+  -ms-box-shadow: inset 0 0 3px #000;
+  box-shadow: inset 0 0 3px #000;
+  text-align: center;
+  cursor: move;
+}
+
+.column header {
+  color: rgb(255, 255, 255);
+  text-shadow: #000 0 1px;
+  box-shadow: 5px;
+  padding: 5px;
+  background: -moz-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+  background: -webkit-gradient(linear, left top, right top,
+                               color-stop(0, rgb(0,0,0)),
+                               color-stop(0.50, rgb(79,79,79)),
+                               color-stop(1, rgb(21,21,21)));
+  background: -webkit-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+  background: -ms-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+  border-bottom: 1px solid #ddd;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -ms-border-radius-topleft: 10px;
+  border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -ms-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-right-radius: 10px;
+}
+
+.column.over {
+  border: 2px dashed #000;
+}
+.title{
+  color: white;
+  height: 75px;
+  position: relative;
+  background-color: #72261b;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
+.title h1 {
+  text-align: center;
+}
+
+body {
+  position: relative;
+  align-items: center;
+  background-color: #4b403f;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
+
+
+button {
+  position: relative;
+  top: 50%;
+  left: 48%;
+  width: 100px ;
+  border-radius: 8px;
+  margin-top: 20px;
+  background-color: rgb(22, 22, 112);
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  border: none;
+  padding: 10px 10px 10px 10px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+
+}
+
+button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
