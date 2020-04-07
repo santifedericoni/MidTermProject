@@ -29,7 +29,8 @@ module.exports = (db) => {
     // console.log(req.body);
 
     const pollTitle = req.body.pollTitle;
-    const values = [1, pollTitle];
+    const user_id = req.body.user_id;
+    const values = [user_id, pollTitle];
     let query = `
     INSERT INTO polls (user_id, title, date_created, completed)
     VALUES ($1, $2, NOW(), false) RETURNING *;
