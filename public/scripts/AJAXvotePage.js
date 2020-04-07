@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
+/* eslint-disable func-style */
 /* eslint-disable no-undef */
 const dragAndDrop = () => {
 
-  var dragSrcEl = null;
+  let dragSrcEl = null;
 
   function handleDragStart(e) {
     dragSrcEl = this;
@@ -25,23 +27,23 @@ const dragAndDrop = () => {
     this.classList.remove('over');
   }
 
-function handleDrop(e) {
-  if (e.stopPropagation) {
-    e.stopPropagation();
+  function handleDrop(e) {
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    }
+    if (dragSrcEl != this) {
+      dragSrcEl.innerHTML = this.innerHTML;
+      this.innerHTML = e.dataTransfer.getData('text/html');
+    }
+    return false;
   }
-  if (dragSrcEl != this) {
-    dragSrcEl.innerHTML = this.innerHTML;
-    this.innerHTML = e.dataTransfer.getData('text/html');
-  }
-  return false;
-}
   function handleDragEnd(e) {
     [].forEach.call(cols, function (col) {
       col.classList.remove('over');
     });
   }
 
-  var cols = document.querySelectorAll('#columns .column');
+  let cols = document.querySelectorAll('#columns .column');
   [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
     col.addEventListener('dragenter', handleDragEnter, false)
@@ -52,19 +54,16 @@ function handleDrop(e) {
   });
 };
 
-
-
-
 const loadOptions = (url) => {
   $.get(url, function(data) {
     console.log(data);
     for (choice of data) {
-     let optionElement = createMovieOption(choice);
-     $("#columns").append(optionElement);
+      let optionElement = createMovieOption(choice);
+      $("#columns").append(optionElement);
     }
-  })
+    dragAndDrop();
+  });
 };
-
 
 const createMovieOption = (choice) => {
   const values = [choice.title, choice.description, choice.trailerurls, choice.id];
@@ -86,10 +85,7 @@ $(document).ready(function() {
   let poll_id = $("#poll-id").text();
   let url = `/api/choices/${poll_id}`;
 
-
-
   loadOptions(url);
-  dragAndDrop();
 
 
   $("button").click(function(event) {
@@ -106,4 +102,13 @@ $(document).ready(function() {
   });
 
 
-});
+//to do list
+//mailgun
+//draganddrop
+//finish votepage
+//result page (dynamic part)
+//review style
+//if we have time
+//view old polls
+//recreate old
+//config to send a link for vote
