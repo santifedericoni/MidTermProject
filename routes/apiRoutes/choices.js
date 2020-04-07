@@ -91,14 +91,14 @@ module.exports = (db) => {
       service: 'mailgun',
       auth: {
         user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-        pass: 'e06a893ae9f51aa1ca2cc0525f54a8fd-aa4b0867-690ac2b8'
+        pass: ''
       }
     });
     let mailOptions = {
       from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-      to: 'santiago.federiconi@gmail.com',
+      to: db.query(`SELECT email FROM users WHERE id = (SELECT user_id FROM polls WHERE id = ${req.body.poll_id})`),
       subject: 'Testmail',
-      text: 'Hi, mail sent.2'
+      text: 'Hi, mail sent.54'
     };
     transporter.sendMail(mailOptions, function(error, info) {
       if (error) {
