@@ -30,15 +30,19 @@ module.exports = (db) => {
   router.post("/:poll_id", (req, res) => {
 
     const rankOrder = req.body.choiceRank;
-
+    let point = rankOrder.length;
     for (id of rankOrder) {
-
-      const values = [];
+      const values = [Number(id), point];
 
       let query = `
       UPDATE choices
-      WHERE
+      SET points = (SELECT points FROM choices WHERE id = $1) + $2
+      WHERE id = $1;
       `;
+
+      point --;
+
+      db.query(query, values)
     }
 
 

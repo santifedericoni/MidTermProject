@@ -7,6 +7,6 @@ CREATE TABLE choices (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   trailerURLS VARCHAR(255),
-  points INTEGER
+  points INTEGER DEFAULT 0
 )
 

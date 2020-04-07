@@ -100,7 +100,7 @@ $(document).ready(function() {
       console.log(data);
     });
   });
-
+});
 
 //to do list
 //mailgun
