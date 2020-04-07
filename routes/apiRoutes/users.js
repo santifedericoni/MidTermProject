@@ -33,15 +33,19 @@ module.exports = (db) => {
     INSERT INTO users (email)
     VALUES ($1) RETURNING *;
     `, values)
-    .then(data => {
-      const user = data.rows[0];
-      res.send(user);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+      .then(data => {
+        const user = data.rows[0];
+        res.send(user);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
+
+
+
+
   return router;
 };

@@ -1,6 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cbe0f1944977e728ef523e0dd1ae1a8ec9719d5d
 const createMovieOption = (number) => {
   const markup = `
   <label>Option ${number}:</label>
@@ -26,7 +31,7 @@ const createNewPoll = () => {
   <button  class = 'submit' type="submit">Create Poll!</button>
 `;
   return markup;
-}
+};
 
 $(document).ready(function() {
   let number = 3;
@@ -41,7 +46,7 @@ $(document).ready(function() {
         user_id = data.id;
       } else {
         $.post("api/users", {email: email}, function(data) {
-         user_id = data.id;
+          user_id = data.id;
         });
       }
     });
@@ -56,11 +61,11 @@ $(document).ready(function() {
       number += 1;
       $("container").append($option);
     });
-  })
+  });
 
   $("form").submit(function(event) {
     event.preventDefault();
-    const pollTitle = $("#poll-title").val()
+    const pollTitle = $("#poll-title").val();
     const movieChoices = [];
     $("container input").each(function() {
       movieChoices.push($(this).val());
@@ -72,8 +77,8 @@ $(document).ready(function() {
         movieChoices
       };
       $.post("/api/choices", choicesObj, function(data) {
-        console.log('Hello');
-        window.location =`/results/${choicesObj.poll_id}`;
+
+        window.location = `/results/${choicesObj.poll_id}`;
 
 
       });

@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const movieTrailer = require('movie-trailer');
 const movieInfo = require('movie-info');
-
+const Mailgun = require('mailgun').Mailgun;
 
 
 
@@ -24,8 +24,6 @@ module.exports = (db) => {
 
 
   router.post("/", (req, res) => {
-    // { poll_id: '7', movieChoices: [ 'Jurrasic Park', 'Excalibur' ] }
-
     for (let movieChoice of req.body.movieChoices) {
 
       let trailer;
@@ -50,7 +48,6 @@ module.exports = (db) => {
             `;
               db.query(query, values)
                 .then(data => {
-                  console.log(data.rows[0]);
                   return;
                 })
                 .catch(err => {
@@ -62,6 +59,8 @@ module.exports = (db) => {
             });
         });
     }
+    let mg = new Mailgun('');
+    mg.sendText('cebalovos@cebalovos.com', 'santiago.federiconi@gmail.com', 'your polls was created', 'link to your poll');
     res.send('Choices have been created');
   });
   return router;
