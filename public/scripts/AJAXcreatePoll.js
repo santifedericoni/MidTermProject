@@ -64,7 +64,7 @@ $(document).ready(function() {
 
   $("form").submit(function(event) {
     event.preventDefault();
-    const pollTitle = $("#poll-title").val();
+    const pollTitle = $("#poll-title").val()
     const movieChoices = [];
     $("container input").each(function() {
       movieChoices.push($(this).val());
@@ -75,7 +75,12 @@ $(document).ready(function() {
         poll_id: data.id,
         movieChoices
       };
-      $.post("/api/choices", choicesObj);
+      $.post("/api/choices", choicesObj, function(data) {
+        console.log('Hello');
+        window.location =`/results/${choicesObj.poll_id}`;
+
+
+      });
     });
 
   });
