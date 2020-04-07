@@ -1,13 +1,13 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const router  = express.Router();
 const movieTrailer = require('movie-trailer');
 const movieInfo = require('movie-info');
-const Mailgun = require('mailgun').Mailgun;
+let nodemailer = require('nodemailer');
 
 module.exports = (db) => {
   router.get("/:poll_id", (req, res) => {
-
-
     const values = [req.params.poll_id];
     let query = `
     SELECT id, title, description, trailerURLS
@@ -31,38 +31,31 @@ module.exports = (db) => {
 
     const rankOrder = req.body.choiceRank;
     let point = rankOrder.length;
-    for (id of rankOrder) {
+    for (let id of rankOrder) {
       const values = [Number(id), point];
-
       let query = `
       UPDATE choices
       SET points = (SELECT points FROM choices WHERE id = $1) + $2
       WHERE id = $1;
       `;
-
       point --;
 
       db.query(query, values)
-      .then(data => {
-        res.send('Update was successful');
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+        .then(data => {
+          res.send('Update was successful');
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     }
-
-
-
   });
 
   router.post("/", (req, res) => {
     for (let movieChoice of req.body.movieChoices) {
-
       let trailer;
       let description;
-
       movieTrailer(movieChoice)
         .then(response => {
           trailer = response;
@@ -93,9 +86,41 @@ module.exports = (db) => {
             });
         });
     }
-    let mg = new Mailgun('');
-    mg.sendText('cebalovos@cebalovos.com', 'santiago.federiconi@gmail.com', 'your polls was created', 'link to your poll');
-    res.send('Choices have been created');
+
+    let transporter = nodemailer.createTransport({
+      service: 'mailgun',
+      auth: {
+        user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
+        pass: 'e06a893ae9f51aa1ca2cc0525f54a8fd-aa4b0867-690ac2b8'
+      }
+    });
+    let mailOptions = {
+      from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
+      to: 'santiago.federiconi@gmail.com',
+      subject: 'Testmail',
+      text: 'Hi, mail sent.2'
+    };
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+      res.status(200);
+      res.send('Mail Send it successful');
+      return;
+    });
   });
   return router;
 };
+
+
+
+
+
+// SELECT *
+// FROM
+//     users t1
+// INNER JOIN polls t2
+//     ON t1.id = t2.user_id;
+// (SELECT * FROM polls WHERE id = 5)

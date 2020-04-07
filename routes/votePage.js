@@ -9,6 +9,3 @@ module.exports = () => {
   return router;
 };
 
-//http://localhost:8080/scripts/AJAXvotePage.js
-
-//http://localhost:8080/votePage/scripts/AJAXvotePage.js

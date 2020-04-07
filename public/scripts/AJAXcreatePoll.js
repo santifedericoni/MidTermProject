@@ -36,7 +36,6 @@ $(document).ready(function() {
   $(".email-input button").click(function(event) {
     event.preventDefault();
     let email = $("#email").val();
-    console.log(email);
     $.get("/api/users", {email: email}, function(data) {
       if (data.id) {
         user_id = data.id;
