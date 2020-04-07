@@ -10,7 +10,7 @@ module.exports = (db) => {
 
     const values = [req.params.poll_id]
     let query = `
-    SELECT title, description, trailerURLS
+    SELECT id, title, description, trailerURLS
     FROM choices
     WHERE poll_id = $1;
     `;
@@ -27,6 +27,23 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/:poll_id", (req, res) => {
+
+    const rankOrder = req.body.choiceRank;
+
+    for (id of rankOrder) {
+
+      const values = [];
+
+      let query = `
+      UPDATE choices
+      WHERE
+      `;
+    }
+
+
+
+  });
 
   router.post("/", (req, res) => {
     for (let movieChoice of req.body.movieChoices) {

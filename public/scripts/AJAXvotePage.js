@@ -67,10 +67,11 @@ const loadOptions = (url) => {
 
 
 const createMovieOption = (choice) => {
-  const values = [choice.title, choice.description, choice.trailerurls];
+  const values = [choice.title, choice.description, choice.trailerurls, choice.id];
   console.log(values[2]);
   const markup = `
   <div class="column" draggable="true">
+    <title>${values[3]}</title>
     <header>${values[0]}</header>
     <p>${values[1]}</p>
     <p>${values[2]}</>
@@ -90,21 +91,19 @@ $(document).ready(function() {
   loadOptions(url);
   dragAndDrop();
 
-  //  this should take all the elements in orden from the vote page and send it to the data base
-  // $("form").submit(function(event) {
-  //   event.preventDefault();
-  //
-  //   const movieChoices = [];
-  //   $(".column").each(function() {
-  //     movieChoices.push($(this).val());
-  //   });
 
-  // $.post("/api/choices", { choices }, function(data) {
-  //   const choicesObj = {
-  //     movieChoices
-  //   };
+  $("button").click(function(event) {
+    event.preventDefault();
+
+    const choiceRank = [];
+    $(".column").each(function() {
+      choiceRank.push($(this).find("title").text());
+    });
+    console.log(choiceRank);
+    $.post(url, { choiceRank }, function(data) {
+      console.log(data);
+    });
+  });
+
 
 });
-
-
-
