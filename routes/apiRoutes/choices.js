@@ -96,7 +96,7 @@ module.exports = (db) => {
     });
     let mailOptions = {
       from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-      to: db.query(`SELECT email FROM users WHERE id = (SELECT user_id FROM polls WHERE id = ${req.body.poll_id})`),
+      to: 'santiago.federiconi@gmail.com',
       subject: 'Testmail',
       text: 'Hi, mail sent.54'
     };
