@@ -29,9 +29,6 @@ const createNewPoll = () => {
   return markup;
 };
 
-
-
-
 $(document).ready(function() {
   let number = 3;
   let user_id;

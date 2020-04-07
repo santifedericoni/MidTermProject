@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 const express = require('express');
 const router  = express.Router();
 const movieTrailer = require('movie-trailer');
 const movieInfo = require('movie-info');
 const Mailgun = require('mailgun').Mailgun;
+
 
 
 module.exports = (db) => {
