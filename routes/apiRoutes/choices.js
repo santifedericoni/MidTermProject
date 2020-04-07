@@ -4,16 +4,21 @@ const movieTrailer = require('movie-trailer');
 const movieInfo = require('movie-info');
 const Mailgun = require('mailgun').Mailgun;
 
-
-
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM choices`;
-    console.log(query);
-    db.query(query)
+  router.get("/:poll_id", (req, res) => {
+
+
+    const values = [req.params.poll_id]
+    let query = `
+    SELECT title, description, trailerURLS
+    FROM choices
+    WHERE poll_id = $1;
+    `;
+    db.query(query, values)
       .then(data => {
         const choices = data.rows;
-        res.json({ choices });
+        console.log(choices);
+        res.send(choices);
       })
       .catch(err => {
         res

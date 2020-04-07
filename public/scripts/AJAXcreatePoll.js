@@ -2,10 +2,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cbe0f1944977e728ef523e0dd1ae1a8ec9719d5d
 const createMovieOption = (number) => {
   const markup = `
   <label>Option ${number}:</label>

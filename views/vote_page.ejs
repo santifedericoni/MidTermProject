@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-<script type="text/javascript" src="scripts/AJAXvotePage.js"></script>
+<script type="text/javascript" src="/scripts/AJAXvotePage.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <script type = "text/javascript">
 
@@ -62,7 +62,8 @@ function handleDrop(e) {
 </script>
 <html lang="en">
   <head>
-      <title>MovideWar</title>
+    <title>MovideWar</title>
+      <title id="poll-id"><%= templateVars %></title>
       <link rel="stylesheet" href="/styles/votePage.css" type="text/css" />
       <header class= 'title'>
         <h1>It's time to vote! </h1>

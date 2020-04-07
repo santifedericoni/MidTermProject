@@ -1,20 +1,52 @@
 /* eslint-disable no-undef */
-const createMovieOption = () => {
-  console.log('createMovieOption');
+const loadOptions = (url) => {
+  $.get(url, function(data) {
+    console.log(data);
+    for (choice of data) {
+     let optionElement = createMovieOption(choice);
+     $("#columns").append(optionElement);
+    }
+  })
+};
+
+
+const createMovieOption = (choice) => {
+  const values = [choice.title, choice.description, choice.trailerurls];
+  console.log(values[2]);
   const markup = `
-  <div class="column" draggable="true"><header>Star Wars</header></div>
-  <div class="column" draggable="true"><header>LOTR</header></div>
-  <div class="column" draggable="true"><header>Pulp Fiction</header></div>
-  <div class="column" draggable="true"><header>La La Land</header></div>
-  <div class="column" draggable="true"><header>Godfather</header></div>
+  <div class="column" draggable="true">
+    <header>${values[0]}</header>
+    <p>${values[1]}</p>
+    <p>${values[2]}</>
+  </div><br><br>
   `;
   return markup;
 };
 
 
 $(document).ready(function() {
-  const $option = createMovieOption();
-  $("#columns").append($option);
+
+  let poll_id = $("#poll-id").text();
+  let url = `/api/choices/${poll_id}`;
+
+
+
+  loadOptions(url);
+
+  //  this should take all the elements in orden from the vote page and send it to the data base
+  // $("form").submit(function(event) {
+  //   event.preventDefault();
+  //
+  //   const movieChoices = [];
+  //   $(".column").each(function() {
+  //     movieChoices.push($(this).val());
+  //   });
+
+  // $.post("/api/choices", { choices }, function(data) {
+  //   const choicesObj = {
+  //     movieChoices
+  //   };
+
 });
 
 
