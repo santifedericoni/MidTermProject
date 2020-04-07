@@ -12,28 +12,22 @@ form.main {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  align-content: center;
   font-family: 'Poppins', sans-serif;
 }
 
-#email {
-  border: 15px ridge #1C6EA4;
-  border-radius: 0px 40px;
-}
-
-.email-input, .create-poll, .option-container {
+.email-input, .option-container {
   color: whitesmoke;
   font-weight: bolder;
   font-size: 45px;
   text-align: center;
-
 }
 
 input {
   font-weight: lighter;
   text-align: center;
+  border: 15px ridge #1C6EA4;
+  border-radius: 0px 40px;
 }
 
 
@@ -52,7 +46,7 @@ button {
   /* text-decoration: none; */
   /* display: inline-block; */
   transition-duration: 0.4s;
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 
 #add-option {
