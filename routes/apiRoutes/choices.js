@@ -43,6 +43,14 @@ module.exports = (db) => {
       point --;
 
       db.query(query, values)
+      .then(data => {
+        res.send('Update was successful');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
     }
 
 

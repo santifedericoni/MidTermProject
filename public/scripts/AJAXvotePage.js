@@ -95,17 +95,20 @@ $(document).ready(function() {
     $(".column").each(function() {
       choiceRank.push($(this).find("title").text());
     });
-    console.log(choiceRank);
+
     $.post(url, { choiceRank }, function(data) {
-      console.log(data);
+
+      $("#columns").remove();
+      $("button").remove();
+      $("h1").text('Thanks for Voting!');
+
+
     });
   });
 });
 
 //to do list
 //mailgun
-//draganddrop
-//finish votepage
 //result page (dynamic part)
 //review style
 //if we have time
