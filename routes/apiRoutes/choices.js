@@ -10,9 +10,10 @@ module.exports = (db) => {
   router.get("/:poll_id", (req, res) => {
     const values = [req.params.poll_id];
     let query = `
-    SELECT id, title, description, trailerURLS
+    SELECT id, title, description, trailerURLS, points
     FROM choices
-    WHERE poll_id = $1;
+    WHERE poll_id = $1
+    ORDER BY points DESC;
     `;
     db.query(query, values)
       .then(data => {
