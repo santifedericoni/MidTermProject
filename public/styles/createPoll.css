@@ -10,9 +10,12 @@ form {
 }
 
 label {
-  color: white
+  color: rgb(185, 183, 183)
 }
 
+input {
+  opacity: 30%;
+}
 
 button {
   position: relative;
