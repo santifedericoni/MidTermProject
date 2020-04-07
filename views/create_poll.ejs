@@ -11,20 +11,20 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="scripts/AJAXcreatePoll.js"></script>
     <link rel="stylesheet" href="/styles/createPoll.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
 
-
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <%- include('_header') %>
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-      <title>MovideWar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>MovideWar</title>
 
   </head>
   <body class = createPollBody>
-    <form>
+    <!-- <%- include('_header') %> -->
+    <form class="main">
       <div class="email-input">
-        <label>Enter Email to Create Poll</label>
+        <label id="enter-email">Enter Email to Create Poll</label>
         <input type="text" id="email" name="email"><br><br>
         <button class ='submit' type="submit">Submit</button>
       </div>

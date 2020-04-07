@@ -1,8 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 
-
-
 const createMovieOption = (number) => {
   const markup = `
   <label>Option ${number}</label>
@@ -14,17 +12,19 @@ const createMovieOption = (number) => {
 
 const createNewPoll = () => {
   const markup = `
+  <div class="create-poll">
   <title>Create Poll</title>
   <label>Poll Title</label>
   <input type="text" id="poll-title" name="fname"><br><br>
+  </div>
   <container class="option-container">
     <label>Option 1</label>
     <input type="text" name="option1"><br><br>
     <label>Option 2</label>
     <input type="text" name="option2"><br><br>
   </container>
+  <img src="https://findicons.com/files/icons/1014/ivista/256/plus.png" id="add-option" style="width:40px;height:40px;"><br><br>
   <button  class = 'submit' type="submit">Create Poll!</button>
-  <img src="https://findicons.com/files/icons/1014/ivista/256/plus.png" id="add-option" style="width:40px;height:40px;">
 `;
   return markup;
 }
