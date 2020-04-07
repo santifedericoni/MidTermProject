@@ -8,7 +8,7 @@ module.exports = (db) => {
   router.get("/:poll_id", (req, res) => {
 
 
-    const values = [req.params.poll_id]
+    const values = [req.params.poll_id];
     let query = `
     SELECT title, description, trailerURLS
     FROM choices
