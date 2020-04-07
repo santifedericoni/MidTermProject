@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
-
 
 
 const createMovieOption = (number) => {
@@ -27,7 +27,7 @@ const createNewPoll = () => {
   <img src="https://findicons.com/files/icons/1014/ivista/256/plus.png" id="add-option" style="width:40px;height:40px;">
 `;
   return markup;
-}
+};
 
 
 
@@ -45,7 +45,7 @@ $(document).ready(function() {
         user_id = data.id;
       } else {
         $.post("api/users", {email: email}, function(data) {
-         user_id = data.id;
+          user_id = data.id;
         });
       }
     });
@@ -60,11 +60,11 @@ $(document).ready(function() {
       number += 1;
       $("container").append($option);
     });
-  })
+  });
 
   $("form").submit(function(event) {
     event.preventDefault();
-    const pollTitle = $("#poll-title").val()
+    const pollTitle = $("#poll-title").val();
     const movieChoices = [];
     $("container input").each(function() {
       movieChoices.push($(this).val());
@@ -76,8 +76,8 @@ $(document).ready(function() {
         movieChoices
       };
       $.post("/api/choices", choicesObj, function(data) {
-        console.log('Hello');
-        window.location =`/results/${choicesObj.poll_id}`;
+
+        window.location = `/results/${choicesObj.poll_id}`;
 
 
       });
