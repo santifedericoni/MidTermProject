@@ -91,7 +91,7 @@ module.exports = (db) => {
       service: 'mailgun',
       auth: {
         user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-        pass: ''
+        pass: '',
       }
     });
     let mailOptions = {
