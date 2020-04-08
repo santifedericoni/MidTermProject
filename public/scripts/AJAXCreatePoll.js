@@ -20,8 +20,10 @@ const createNewPoll = () => {
     <label>Option 2:</label>
     <input class="options" type="text" name="option2">
   </container>
-  <img src="https://findicons.com/files/icons/1014/ivista/256/plus.png" id="add-option" style="width:40px;height:40px;"><br>
+  <div id="options">
+  <i class="far fa-plus-square fa-7x" id="add-option"></i><br>
   <button class ='submit' type="submit">Create Poll!</button>
+  </div>
 `;
   return markup;
 };

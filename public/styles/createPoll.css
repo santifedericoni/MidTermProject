@@ -1,10 +1,8 @@
 .createPollBody {
-  background-image: url("./milky-way-2560x1440-stars-4k-18250.jpg");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #004f8c;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
 }
+
 
 form.main {
   margin: 5% 33%;
@@ -49,6 +47,13 @@ form.main {
   box-shadow: 5px 10px rgb(22, 22, 112);
 }
 
+#options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
 
 .submit {
   width: auto;
@@ -66,8 +71,7 @@ form.main {
 }
 
 #add-option {
-  width: 10% !important;
-  height: 10% !important;
+  color: white;
   cursor: pointer;
   margin-bottom: 2.5%;
 }
