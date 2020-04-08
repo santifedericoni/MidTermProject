@@ -106,12 +106,3 @@ $(document).ready(function() {
     });
   });
 });
-
-//to do list
-//mailgun
-//result page (dynamic part)
-//review style
-//if we have time
-//view old polls
-//recreate old
-//config to send a link for vote

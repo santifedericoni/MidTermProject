@@ -5,8 +5,11 @@ const router  = express.Router();
 const movieTrailer = require('movie-trailer');
 const movieInfo = require('movie-info');
 let nodemailer = require('nodemailer');
+require('dotenv').config();
 
 module.exports = (db) => {
+
+
   router.get("/:poll_id", (req, res) => {
     const values = [req.params.poll_id];
     let query = `
@@ -76,6 +79,44 @@ module.exports = (db) => {
             `;
               db.query(query, values)
                 .then(data => {
+
+                  const values = [data.rows[0].poll_id];
+                  let query = `
+                  SELECT email, polls.id
+                  FROM users
+                  JOIN polls ON users.id = user_id
+                  WHERE user_id = (SELECT user_id
+                              FROM polls
+                              WHERE polls.id = $1);
+                  `;
+                  db.query(query, values)
+                  .then(data => {
+                    console.log(data.rows[0]);
+                    let transporter = nodemailer.createTransport({
+                      service: 'mailgun',
+                      auth: {
+                        user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
+                        pass: `${process.env.MAILGUN_PW}`
+                      }
+                    });
+                    let mailOptions = {
+                      from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
+                      to: `${data.rows[0].email}`,
+                      subject: 'Testmail',
+                      text: `Voting Link: http://localhost:8080/votepage/${data.rows[0].id}. View Results: http://localhost:8080/results/${data.rows[0].id}.`
+                    };
+                    transporter.sendMail(mailOptions, function(error, info) {
+                      if (error) {
+                        console.log(error);
+                      } else {
+                        console.log('Email sent: ' + info.response);
+                      }
+                      res.status(200);
+                      res.send('Mail Send it successful');
+                      return;
+                    });
+                  })
+
                   return;
                 })
                 .catch(err => {
@@ -88,29 +129,6 @@ module.exports = (db) => {
         });
     }
 
-    let transporter = nodemailer.createTransport({
-      service: 'mailgun',
-      auth: {
-        user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-        pass: ''
-      }
-    });
-    let mailOptions = {
-      from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-      to: 'santiago.federiconi@gmail.com',
-      subject: 'Testmail',
-      text: 'Hi, mail sent.54'
-    };
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-      res.status(200);
-      res.send('Mail Send it successful');
-      return;
-    });
   });
   return router;
 };
@@ -119,9 +137,8 @@ module.exports = (db) => {
 
 
 
-// SELECT *
+// SELECT email, *
 // FROM
 //     users t1
 // INNER JOIN polls t2
-//     ON t1.id = t2.user_id;
-// (SELECT * FROM polls WHERE id = 5)
+//     ON t1.id = (SELECT user_id FROM polls WHERE polls.id = 5);
