@@ -1,11 +1,5 @@
-.createPollBody {
-  background-color: #004f8c;
-  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
-}
-
-
 form.main {
-  margin: 5% 33%;
+  margin: 3% 33%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +9,7 @@ form.main {
 .email-input, .option-container {
   color: whitesmoke;
   font-weight: bolder;
-  font-size: 40px;
+  font-size: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -32,19 +26,20 @@ form.main {
 #poll-title {
   font-weight: bolder;
   font-size: 30px;
+  width: 500px;
 }
 
 
 .email-input input, .option-container input {
   font-weight: lighter;
   text-align: center;
-  font-size: 25px;
-  border: 15px ridge #1C6EA4;
+  font-size: 20px;
+  border: 5px ridge #1C6EA4;
   border-radius: 0px 40px;
   width: 80%;
   padding: 2.5%;
   margin-bottom: 5%;
-  box-shadow: 5px 10px rgb(22, 22, 112);
+  box-shadow: 2px 5px rgb(22, 22, 112);
 }
 
 #options {
@@ -55,23 +50,23 @@ form.main {
 
 }
 
-.submit {
+/* .submit {
+  font-size: 15px;
   width: auto;
   background-color: white;
-  border: 15px ridge  #1C6EA4;
-  border-radius: 40px 0px;
-  font-size: 35px;
+  border: 5px ridge #1C6EA4;
+  border-radius: 20px 0px;
+  font-size: 25px;
   font-weight: bolder;
-  padding: 2.5%;
-  color:black;
+  color: black;
   text-align: center;
   transition-duration: 0.4s;
   cursor: pointer;
-  box-shadow: 5px 10px rgb(22, 22, 112);
-}
+  box-shadow: 2px 5px #161670;
+} */
 
 #add-option {
   color: white;
   cursor: pointer;
-  margin-bottom: 2.5%;
+  margin-left: 15px;
 }

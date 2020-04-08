@@ -1,0 +1,38 @@
+body {
+  position: relative;
+  align-items: center;
+}
+.column {
+  height: 75px;
+}
+
+
+.pollTitle{
+  color: white;
+  height: 75px;
+  width: 100%;
+  position: relative;
+  background-color: #004f8c;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+}
+.pollTitle h1 {
+  text-align: center;
+}
+
+
+button {
+  position: relative;
+  top: 50%;
+  left: 46.8%;
+  width: 100px ;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: none;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+}
+
+

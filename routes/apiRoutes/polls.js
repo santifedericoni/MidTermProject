@@ -5,7 +5,7 @@
  *   these routes are mounted onto /widgets
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-
+//arreglar que cuando se crea una opcion que la pelicula no existe, la cree igual
 const express = require('express');
 const router  = express.Router();
 
