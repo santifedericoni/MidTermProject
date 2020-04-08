@@ -31,7 +31,7 @@ $(document).ready(function() {
   loadOptions(url);
 
   //setInterval(loadOptions(url), 5000);
-  let intervalVar = setInterval(function(){ loadOptions(url) }, 3000);
+  let intervalVar = setInterval(function() {loadOptions(url)}, 3000);
 
 
   $("button").click(function(event) {

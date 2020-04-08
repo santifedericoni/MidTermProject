@@ -56,7 +56,6 @@ const dragAndDrop = () => {
 
 const loadOptions = (url) => {
   $.get(url, function(data) {
-    console.log(data);
     for (choice of data) {
       let optionElement = createMovieOption(choice);
       $("#columns").append(optionElement);
@@ -67,7 +66,6 @@ const loadOptions = (url) => {
 
 const createMovieOption = (choice) => {
   const values = [choice.title, choice.description, choice.trailerurls, choice.id];
-  console.log(values[2]);
   const markup = `
   <div class="column" draggable="true">
     <title>${values[3]}</title>
@@ -79,30 +77,39 @@ const createMovieOption = (choice) => {
   return markup;
 };
 
-
-$(document).ready(function() {
-
-  let poll_id = $("#poll-id").text();
-  let url = `/api/choices/${poll_id}`;
-
-  loadOptions(url);
-
-
-  $("button").click(function(event) {
-    event.preventDefault();
-
-    const choiceRank = [];
-    $(".column").each(function() {
-      choiceRank.push($(this).find("title").text());
-    });
-
-    $.post(url, { choiceRank }, function(data) {
-
+const isFinish = (url, poll_id) => {
+  $.get(url, function(data) {
+    realPollId = poll_id - 1;
+    const status = data.polls[realPollId].completed;
+    if (!status) {
+      let poll_id = $("#poll-id").text();
+      let url = `/api/choices/${poll_id}`;
+      loadOptions(url);
+      $("button").click(function(event) {
+        event.preventDefault();
+        const choiceRank = [];
+        $(".column").each(function() {
+          choiceRank.push($(this).find("title").text());
+        });
+        $.post(url, { choiceRank }, function(data) {
+          $("#columns").remove();
+          $("button").remove();
+          $("h1").text('Thanks for Voting!');
+        });
+      });
+    } else {
+      $("h1").text('The poll is finish');
       $("#columns").remove();
       $("button").remove();
-      $("h1").text('Thanks for Voting!');
-
-
-    });
+    }
   });
+};
+
+$(document).ready(function() {
+  let poll_id = $("#poll-id").text();
+  let urlpolls = `/api/polls/`;
+  isFinish(urlpolls, poll_id);
+
 });
+
+
