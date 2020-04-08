@@ -23,15 +23,15 @@ const loadOptions = (url) => {
 
 $(document).ready(function() {
 
-
-
   let poll_id = $("#poll-id").text();
   let url = `/api/choices/${poll_id}`;
 
   loadOptions(url);
 
   //setInterval(loadOptions(url), 5000);
-  let intervalVar = setInterval(function() {loadOptions(url)}, 3000);
+  let intervalVar = setInterval(function() {
+    loadOptions(url);
+  }, 10000);
 
 
   $("button").click(function(event) {
