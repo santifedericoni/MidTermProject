@@ -1,11 +1,118 @@
-// See: https://sass-lang.com/
-
 body {
-  background-color: #EEE;
+  position: relative;
+  align-items: center;
+  background-color: #004f8c;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+}
 
-  h1 {
-    color: #244751;
-  }
+.createPollBody {
+  background-color: #004f8c;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
 }
 
 
+
+.column {
+  position: relative;
+  top: 0px;
+  left: 50%;
+  margin: -70px 0 0 -170px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  border: 2px solid #1077d8;
+  background-color: #3d7bce;
+  margin-right: 5px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px #000;
+  -ms-box-shadow: inset 0 0 3px #000;
+  box-shadow: inset 0 0 3px #000;
+  text-align: center;
+
+}
+
+.column header {
+   color: rgb(233, 238, 243);
+   text-shadow: rgb(32, 8, 170) 0 1px;
+   box-shadow: 5px;
+   padding: 5px;
+   background:  rgb(8, 92, 170) 0 1px;
+   border-bottom: 1px solid rgba(56, 84, 240, 0.678);
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -ms-border-radius-topleft: 10px;
+  border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -ms-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-right-radius: 10px;
+}
+
+.column.over {
+  border: 2px dashed rgb(3, 43, 88);
+}
+.title{
+  margin-bottom: 20px;
+  color: white;
+  height: 75px;
+  position: relative;
+  background-color: #004f8c;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+}
+.title h1 {
+
+  text-align: center;
+}
+
+.submit {
+  font-size: 15px;
+  width: auto;
+  background-color: white;
+  border: 5px ridge #1C6EA4;
+  border-radius: 20px 0px;
+  font-size: 25px;
+  font-weight: bolder;
+  /* padding: 2.5%; */
+  color: black;
+  text-align: center;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  box-shadow: 2px 5px #161670;
+}
+
+
+
+#columns {
+  margin-top: -30px;
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

@@ -65,6 +65,7 @@ const loadOptions = (url) => {
 };
 
 const createMovieOption = (choice) => {
+  console.log(choice)
   const values = [choice.title, choice.description, choice.trailerurls, choice.id];
   const markup = `
   <div class="column" draggable="true">

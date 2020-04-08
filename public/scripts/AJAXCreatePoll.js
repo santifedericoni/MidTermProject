@@ -21,8 +21,8 @@ const createNewPoll = () => {
     <input class="options" type="text" name="option2">
   </container>
   <div id="options">
-  <i class="far fa-plus-square fa-7x" id="add-option"></i><br>
   <button class ='submit' type="submit">Create Poll!</button>
+  <i class="far fa-plus-square fa-3x" id="add-option"></i><br>
   </div>
 `;
   return markup;
