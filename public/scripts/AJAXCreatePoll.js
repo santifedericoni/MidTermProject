@@ -6,7 +6,6 @@ const createMovieOption = (number) => {
   const markup = `
   <label>Option ${number}:</label>
   <input class="options" type="text" name="option${number}">
-  <br><br>
   `;
   return markup;
 };
@@ -14,17 +13,15 @@ const createMovieOption = (number) => {
 const createNewPoll = () => {
   const markup = `
   <container class="option-container">
-    <title>Create Poll</title>
     <label>Poll Title</label>
-    <input type="text" id="poll-title" name="fname"><br><br>
-
+    <input type="text" id="poll-title" name="fname">
     <label>Option 1:</label>
-    <input class="options" type="text" name="option1"><br><br>
+    <input class="options" type="text" name="option1">
     <label>Option 2:</label>
-    <input class="options" type="text" name="option2"><br><br>
+    <input class="options" type="text" name="option2">
   </container>
-  <img src="https://findicons.com/files/icons/1014/ivista/256/plus.png" id="add-option" style="width:40px;height:40px;"><br><br>
-  <button  class = 'submit' type="submit">Create Poll!</button>
+  <img src="https://findicons.com/files/icons/1014/ivista/256/plus.png" id="add-option" style="width:40px;height:40px;"><br>
+  <button class ='submit' type="submit">Create Poll!</button>
 `;
   return markup;
 };
