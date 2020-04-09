@@ -3,12 +3,9 @@ body {
   align-items: center;
   background-color: #004f8c;
   background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+  margin-top: 3%;
 }
 
-.createPollBody {
-  background-color: #004f8c;
-  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
-}
 
 .card {
   border: 2px solid #1077d8;

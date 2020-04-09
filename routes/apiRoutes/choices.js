@@ -85,16 +85,16 @@ module.exports = (db) => {
         }
         return;
         })
-        .then((data) => {
-          if (data) {
-            console.log('Email sent: ', data.response);
-            res
-              .status(200)
-              .send('Movie choice was created successfully');
-            return;
-          }
-        })
-        .catch(err => {
+      .then((data) => {
+        if (data) {
+          console.log('Email sent: ', data.response);
+          res
+            .status(200)
+            .send('Movie choice was created successfully');
+          return;
+        }
+      })
+      .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
