@@ -27,7 +27,6 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
-const homePage    = require("./routes/homePage");
 const createPoll  = require("./routes/createPoll");
 const results     = require("./routes/results");
 const votePage    = require("./routes/votePage");
@@ -43,7 +42,6 @@ app.use("/createPoll", createPoll());
 app.use("/oldPolls", oldPolls());
 app.use("/votePage", votePage());
 app.use("/results", results());
-app.use("/", homePage());
 
 // Mount all API routes
 app.use("/api/users", usersQueries(db));

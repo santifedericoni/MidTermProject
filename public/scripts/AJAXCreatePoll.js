@@ -70,10 +70,9 @@ $(document).ready(function() {
         poll_id: data.id,
         movieChoices
       };
-      $.post("/api/choices", choicesObj, function(data) {
+      $.post("/api/choices", choicesObj, function() {
 
         window.location = `/results/${choicesObj.poll_id}`;
-
 
       });
     });
