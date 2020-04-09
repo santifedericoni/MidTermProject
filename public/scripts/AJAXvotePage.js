@@ -73,8 +73,9 @@ const createMovieOption = (choice) => {
     <title>${values[3]}</title>
     <h3 class="card-header">${values[0]}</h3>
     <div class="card-body">
+    <i class="fab fa-youtube"></i>
+    <a href="${values[2]}"target="_blank">Trailer</a>
 
-    <p>${values[2]}</p>
     <div class="right">
         <p>${values[1]}</p>
         <i></i>
