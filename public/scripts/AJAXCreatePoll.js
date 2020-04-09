@@ -59,8 +59,6 @@ $(document).ready(function() {
         $( ".deletable").last().remove();
       }
     });
-
-
   });
 
 
