@@ -68,13 +68,18 @@ const createMovieOption = (choice) => {
   const values = [choice.title, choice.description, choice.trailerurls, choice.id];
   const markup = `
 
-  <div class="column card" draggable="true">
+  <div class="column col-lg-8 col-sm-10" draggable="true">
+  <div class="card text-center mb-3">
     <title>${values[3]}</title>
-    <header>${values[0]}</header>
+    <h3 class="card-header">${values[0]}</h3>
+    <div class="card-body">
+
     <p>${values[2]}</p>
     <div class="right">
         <p>${values[1]}</p>
         <i></i>
+    </div>
+    </div>
     </div>
 </div>
 </div>
@@ -115,7 +120,6 @@ $(document).ready(function() {
   let poll_id = $("#poll-id").text();
   let urlpolls = `/api/polls/`;
   isFinish(urlpolls, poll_id);
-
 });
 
 

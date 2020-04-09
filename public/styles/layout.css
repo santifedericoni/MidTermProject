@@ -10,18 +10,9 @@ body {
   background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
 }
 
-.column {
-  position: relative;
-  top: 0px;
-  left: 50%;
-  margin: -70px 0 0 -170px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 350px;
+.card {
   border: 2px solid #1077d8;
   background-color: #3d7bce;
-  margin-right: 5px;
   -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -32,7 +23,7 @@ body {
   text-align: center;
 }
 
-.column header {
+.card h3 {
   color: #e9eef3;
   text-shadow: #2008aa 0 1px;
   box-shadow: 5px;
@@ -49,21 +40,14 @@ body {
   border-top-right-radius: 10px;
 }
 
-.column.over {
+.card.over {
   border: 2px dashed #032b58;
 }
 
 .title {
-  margin-bottom: 20px;
   color: white;
-  height: 75px;
-  position: relative;
   background-color: #004f8c;
   background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
-}
-
-.title h1 {
-  text-align: center;
 }
 
 .submit {
@@ -74,14 +58,9 @@ body {
   border-radius: 20px 0px;
   font-size: 25px;
   font-weight: bolder;
-  /* padding: 2.5%; */
   color: black;
   text-align: center;
   transition-duration: 0.4s;
   cursor: pointer;
   box-shadow: 2px 5px #161670;
-}
-
-#columns {
-  margin-top: -30px;
 }
