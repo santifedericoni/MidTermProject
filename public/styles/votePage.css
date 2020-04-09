@@ -7,12 +7,11 @@
   -webkit-user-drag: element;
 }
 
-.column {
-  margin-top: -25px;
+.card {
   cursor: move;
 }
 
-body {
+/* body {
   position: relative;
   align-items: center;
 }
@@ -31,7 +30,7 @@ button {
   text-decoration: none;
   display: inline-block;
 
-}
+} */
 
 
 .card .right {

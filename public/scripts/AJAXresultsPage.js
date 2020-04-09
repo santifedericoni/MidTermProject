@@ -1,12 +1,20 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-undef */
 const createMovieOption = (choice) => {
   const values = [choice.title, choice.points];
   console.log(values[2]);
   const markup = `
-  <div class="column">
-    <header>${values[0]}</header>
-    <p> Points: ${values[1]}</p>
-    <br><br>
-  </div>
+  <div class="column col-lg-8 col-sm-10">
+    <div class="card text-center mb-3">
+      <h3 class="card-header">${values[0]}</h3>
+      <div class="card-body">
+        <div class="right">
+          <p>Points: ${values[1]}</p>
+          <i></i>
+        </div>
+      </div>
+    </div>
+</div>
   `;
   return markup;
 };
@@ -38,5 +46,7 @@ $(document).ready(function() {
     event.preventDefault();
     clearInterval(intervalVar);
     $(".column").not(':first').remove();
+    $(".submit").remove();
+    $("h1").text('The winner is');
   });
 });
