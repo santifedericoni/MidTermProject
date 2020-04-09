@@ -30,7 +30,6 @@ module.exports = (db) => {
   });
 
   router.post("/:poll_id", (req, res) => {
-
     const rankOrder = req.body.choiceRank;
     let point = rankOrder.length;
     for (let id of rankOrder) {
@@ -55,12 +54,15 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
+
     for (let movieChoice of req.body.movieChoices) {
+      // console.log(movieChoice);
       let trailer;
       let description;
       movieTrailer(movieChoice)
       .then(response => {
         trailer = response;
+        // console.log(trailer);
         return;
       })
       .then(() => {
@@ -68,6 +70,7 @@ module.exports = (db) => {
       })
       .then(response => {
         description = response.overview;
+        // console.log(description);
         return;
       })
       .then(() => {
@@ -76,56 +79,59 @@ module.exports = (db) => {
           INSERT INTO choices (poll_id, title, description, trailerURLS)
           VALUES ($1, $2, $3, $4) RETURNING *;
           `;
-        db.query(query, values)
-        .then(data => {
-          console.log('This should be the poll id: ', data.rows[0].poll_id);
-          const values = [data.rows[0].poll_id];
-          let query = `
-            SELECT email, polls.id
-            FROM users
-            JOIN polls ON users.id = user_id
-            WHERE user_id = (SELECT user_id
-                             FROM polls
-                             WHERE polls.id = $1);
-            `;
-          db.query(query, values)
-          .then(data => {
-            let transporter = nodemailer.createTransport({
-              service: 'mailgun',
-              auth: {
-                user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-                pass: `${process.env.MAILGUN_PW}`
-              }
-            });
-            console.log('This is the data: ', data.rows[0]);
-            let mailOptions = {
-              from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
-              to: `${data.rows[0].email}`,
-              subject: 'Testmail',
-              text: `Voting Link: http://localhost:8080/votepage/${values}. View Results: http://localhost:8080/results/${values}.`
-            };
-            transporter.sendMail(mailOptions, function(error, info) {
-              if (error) {
-                console.log(error);
-              } else {
-                console.log('Email sent: ' + info.response);
-              }
-              res.status(200);
-              res.send('Mail was sent successfully');
-              return;
-            });
-          });
-          return;
-        })
-        .catch(err => {
+        return db.query(query, values);
+      })
+      .then(data => {
+        // console.log(data);
+        const values = [data.rows[0].poll_id];
+        let query = `
+         SELECT email, polls.id
+         FROM users
+         JOIN polls ON users.id = user_id
+         WHERE polls.id = $1;
+        `;
+        return db.query(query, values);
+      })
+      .then(data => {
+        console.log(data);
+        let transporter = nodemailer.createTransport({
+          service: 'mailgun',
+          auth: {
+            user: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
+            pass: `${process.env.MAILGUN_PW}`
+          }
+        });
+        let mailOptions = {
+          from: 'postmaster@sandboxd7bc8db836ac4a8698465009cc5c7b26.mailgun.org',
+          to: `${data.rows[0].email}`,
+          subject: 'Testmail',
+          text: `Voting Link: http://localhost:8080/votepage/${data.rows[0].id}. View Results: http://localhost:8080/results/${data.rows[0].id}.`
+        };
+        transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
           res
-           .status(500)
-           .json({ error: err.message });
+            .status(200)
+            .send('Poll was created and results and vote links were sent successfully');
           return;
         });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+        return;
       });
-    };
+    }
   });
+
+
   return router;
 };
+
+
+
 

@@ -13,15 +13,15 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     let query = `SELECT * FROM polls`;
     db.query(query)
-      .then(data => {
-        const polls = data.rows;
-        res.json({ polls });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    .then(data => {
+       const polls = data.rows;
+       res.json({ polls });
+     })
+     .catch(err => {
+       res
+         .status(500)
+         .json({ error: err.message });
+     });
   });
 
   router.post("/", (req, res) => {
@@ -35,15 +35,15 @@ module.exports = (db) => {
     VALUES ($1, $2, NOW(), false) RETURNING *;
     `;
     db.query(query, values)
-      .then(data => {
-        const newPoll = data.rows[0];
-        res.send(newPoll);
-      })
-      .catch (err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    .then(data => {
+      const newPoll = data.rows[0];
+       res.send(newPoll);
+     })
+     .catch (err => {
+       res
+         .status(500)
+         .json({ error: err.message });
+     });
   });
 
   return router;
