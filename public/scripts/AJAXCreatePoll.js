@@ -37,7 +37,6 @@ $(document).ready(function() {
     event.preventDefault();
     let email = $("#email").val();
     $.get("/api/users", {email: email}, function(data) {
-      console.log(data);
         user_id = data.id;
       });
 
@@ -73,16 +72,9 @@ $(document).ready(function() {
       movieChoices.push($(this).val());
     });
 
-    $.post("/api/polls", { pollTitle, user_id }, function(data) {
-      const choicesObj = {
-        poll_id: data.id,
-        movieChoices
-      };
+    $.post("/api/choices", { pollTitle, user_id, movieChoices }, function(data) {
+        window.location = `/results/${data.id}`;
 
-      $.post("/api/choices", choicesObj, function() {
-        window.location = `/results/${choicesObj.poll_id}`;
-
-      });
     });
 
   });
