@@ -7,6 +7,46 @@ const movieInfo = require('movie-info');
 let nodemailer = require('nodemailer');
 require('dotenv').config();
 
+
+const getMovieTrailer = (movieName) => {
+  return new Promise((resolve, reject) => {
+    movieTrailer(movieName)
+    .then(response => {
+      resolve(response);
+    })
+    .catch(() => {
+      resolve('Trailer was not found.');
+    })
+  });
+};
+
+const getMovieInfo = (movieName) => {
+  return new Promise((resolve, reject) => {
+    let data;
+    movieInfo(movieName)
+    .then(response => {
+      if (response.overview) {
+        console.log("IF FIRED");
+        data = response.overview;
+        resolve(data);
+      } else {
+        console.log("ELSE FIRED");
+        data = 'Description not found';
+        resolve(data);
+      }
+    })
+    .catch(err => {
+      reject(err);
+    })
+  });
+};
+
+
+
+
+
+
+
 module.exports = (db) => {
 
   router.get("/:poll_id", (req, res) => {
@@ -59,18 +99,18 @@ module.exports = (db) => {
       // console.log(movieChoice);
       let trailer;
       let description;
-      movieTrailer(movieChoice)
+      getMovieTrailer(movieChoice)
       .then(response => {
+        return response;
+      })
+      .then((response) => {
         trailer = response;
-        // console.log(trailer);
-        return;
-      })
-      .then(() => {
-       return movieInfo(movieChoice)
+        return getMovieInfo(movieChoice);
       })
       .then(response => {
-        description = response.overview;
-        // console.log(description);
+        console.log(typeof response);
+        description = response;
+        console.log(description);
         return;
       })
       .then(() => {
@@ -93,7 +133,7 @@ module.exports = (db) => {
         return db.query(query, values);
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         let transporter = nodemailer.createTransport({
           service: 'mailgun',
           auth: {
@@ -107,19 +147,16 @@ module.exports = (db) => {
           subject: 'Testmail',
           text: `Voting Link: http://localhost:8080/votepage/${data.rows[0].id}. View Results: http://localhost:8080/results/${data.rows[0].id}.`
         };
-        transporter.sendMail(mailOptions, function(error, info) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Email sent: ' + info.response);
-          }
+        return transporter.sendMail(mailOptions);
+        })
+        .then((data) => {
+          // console.log('Email sent: ', data.response);
           res
             .status(200)
             .send('Poll was created and results and vote links were sent successfully');
           return;
-        });
-      })
-      .catch(err => {
+        })
+        .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
