@@ -65,15 +65,20 @@ const loadOptions = (url) => {
 };
 
 const createMovieOption = (choice) => {
-  console.log(choice)
   const values = [choice.title, choice.description, choice.trailerurls, choice.id];
   const markup = `
-  <div class="column" draggable="true">
+
+  <div class="column card" draggable="true">
     <title>${values[3]}</title>
     <header>${values[0]}</header>
-    <p>${values[1]}</p>
-    <p>${values[2]}</>
-  </div><br><br>
+    <p>${values[2]}</p>
+    <div class="right">
+        <p>${values[1]}</p>
+        <i></i>
+    </div>
+</div>
+</div>
+  <br><br>
   `;
   return markup;
 };

@@ -32,3 +32,49 @@ button {
   display: inline-block;
 
 }
+
+
+.card .right {
+  min-width:400px;
+  top:50%;
+  left:100%;
+  margin-left:20px;
+  transform:translate(0, -50%);
+  padding:10px 20px;
+  color:#FFFFFF;
+  background-color:#6699CC;
+  font-weight:normal;
+  font-size:13px;
+  border-radius:8px;
+  position:absolute;
+  z-index:99999999;
+  box-sizing:border-box;
+  border:1px solid #000000;box-shadow:0 1px 8px rgba(0,0,0,0.5);
+  visibility:hidden; opacity:0; transition:opacity 0.8s;
+}
+
+.card:hover .right {
+  visibility:visible; opacity:1;
+}
+
+.card .right i {
+  position:absolute;
+  top:50%;
+  right:100%;
+  margin-top:-12px;
+  width:12px;
+  height:24px;
+  overflow:hidden;
+}
+
+.card .right i::after {
+  content:'';
+  position:absolute;
+  width:12px;
+  height:12px;
+  left:0;
+  top:50%;
+  transform:translate(50%,-50%) rotate(-45deg);
+  background-color:#6699CC;
+  border:1px solid #000000;box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
