@@ -12,40 +12,31 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     const values = [req.query.email];
+    console.log(values);
     db.query(`
       SELECT * FROM users
       WHERE email = $1;
     `, values)
-      .then(data => {
-        const user = data.rows[0];
-        res.send(user);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    .then(data => {
+      if (data.rows.length !== 0) {
+        return data;
+      } else {
+        return db.query(`
+        INSERT INTO users (email)
+        VALUES ($1) RETURNING *;
+        `, values)
+      }
+    })
+    .then(data => {
+      const user = data.rows[0];
+      res.send(user);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   });
-
-  router.post("/", (req, res) => {
-    const values = [req.body.email];
-    db.query(`
-    INSERT INTO users (email)
-    VALUES ($1) RETURNING *;
-    `, values)
-      .then(data => {
-        const user = data.rows[0];
-        res.send(user);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-
-
 
   return router;
 };
