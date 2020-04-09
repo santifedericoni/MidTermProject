@@ -110,7 +110,7 @@ const isFinish = (url, poll_id) => {
         });
       });
     } else {
-      $("h1").text('The poll is finish');
+      $("h1").text('The poll has been closed.');
       $("#columns").remove();
       $("button").remove();
     }
