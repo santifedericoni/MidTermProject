@@ -13,7 +13,7 @@ const createMovieOption = (number) => {
 const createNewPoll = () => {
   const markup = `
   <container class="option-container">
-    <h3>Poll Title</h3>
+    <h1>Poll Title</h1>
     <input type="text" id="poll-title" name="fname">
     <label class="deletable">Option 1:</label>
     <input class="options" type="text" name="option1">

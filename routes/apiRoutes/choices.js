@@ -13,15 +13,15 @@ module.exports = (db) => {
     ORDER BY points DESC;
     `;
     db.query(query, values)
-    .then(data => {
-      const choices = data.rows;
-      res.send(choices);
-    })
-    .catch(err => {
-       res
-        .status(500)
-        .json({ error: err.message });
-    });
+      .then(data => {
+        const choices = data.rows;
+        res.send(choices);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
   router.post("/:poll_id", (req, res) => {
@@ -36,14 +36,14 @@ module.exports = (db) => {
       `;
       point --;
       db.query(query, values)
-      .then(() => {
-        res.send('Update was successful');
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+        .then(() => {
+          res.send('Update was successful');
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     }
   });
 
@@ -52,54 +52,54 @@ module.exports = (db) => {
       let trailer;
       let description;
       movieHelpers.getMovieTrailer(movieChoice)
-      .then(response => response)
-      .then((response) => {
-        trailer = response;
-        return movieHelpers.getMovieInfo(movieChoice);
-      })
-      .then(response => {
-        description = response;
-        return;
-      })
-      .then(() => {
-        let values = [req.body.poll_id, movieChoice, description, trailer];
-        let query = `
-          INSERT INTO choices (poll_id, title, description, trailerURLS)
-          VALUES ($1, $2, $3, $4) RETURNING *;
-        `;
-        return db.query(query, values);
-      })
-      .then(data => {
-        const values = [data.rows[0].poll_id];
-        let query = `
-          SELECT email, polls.id
-          FROM users
-          JOIN polls ON users.id = user_id
-          WHERE polls.id = $1;
-        `;
-        return db.query(query, values);
-      })
-      .then(data => {
-        if (movieChoice === req.body.movieChoices[req.body.movieChoices.length - 1]) {
-          return movieHelpers.sendLinks(data);
-        }
-        return;
+        .then(response => response)
+        .then((response) => {
+          trailer = response;
+          return movieHelpers.getMovieInfo(movieChoice);
         })
-      .then((data) => {
-        if (data) {
-          console.log('Email sent: ', data.response);
-          res
-            .status(200)
-            .send('Movie choice was created successfully');
+        .then(response => {
+          description = response;
           return;
-        }
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-        return;
-      });
+        })
+        .then(() => {
+          let values = [req.body.poll_id, movieChoice, description, trailer];
+          let query = `
+            INSERT INTO choices (poll_id, title, description, trailerURLS)
+            VALUES ($1, $2, $3, $4) RETURNING *;
+          `;
+          return db.query(query, values);
+        })
+        .then(data => {
+          const values = [data.rows[0].poll_id];
+          let query = `
+            SELECT email, polls.id
+            FROM users
+            JOIN polls ON users.id = user_id
+            WHERE polls.id = $1;
+          `;
+          return db.query(query, values);
+        })
+        .then(data => {
+          if (movieChoice === req.body.movieChoices[req.body.movieChoices.length - 1]) {
+            return movieHelpers.sendLinks(data);
+          }
+          return;
+        })
+        .then((data) => {
+          if (data) {
+            console.log('Email sent: ', data.response);
+            res
+              .status(200)
+              .send('Movie choice was created successfully');
+            return;
+          }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+          return;
+        });
     }
   });
 
