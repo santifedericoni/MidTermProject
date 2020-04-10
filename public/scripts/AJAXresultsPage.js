@@ -47,6 +47,9 @@ $(document).ready(function() {
     clearInterval(intervalVar);
     $(".column").not(':first').remove();
     $(".submit").remove();
-    $("h1").text('The winner is');
+    $("h1").text('The winner is:');
+    $.post(`/api/polls/${poll_id}`, function(data) {
+      console.log(data);
+    });
   });
 });
