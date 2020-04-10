@@ -12,7 +12,10 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM polls`;
+    let query = `
+    SELECT * FROM polls
+    ORDER BY id;
+    `;
     db.query(query)
       .then(data => {
         const polls = data.rows;
@@ -25,18 +28,17 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/", (req, res) => {
-    const pollTitle = req.body.pollTitle;
-    const user_id = req.body.user_id;
-    const values = [user_id, pollTitle];
-    let query = `
-    INSERT INTO polls (user_id, title, date_created, completed)
-    VALUES ($1, $2, NOW(), false) RETURNING *;
-    `;
+  router.post("/:poll_id", (req, res) => {
+    const values = [Number(req.params.poll_id)];
+    console.log(values);
+    let query =`
+      UPDATE polls
+      SET completed = TRUE
+      WHERE id = $1;
+      `;
     db.query(query, values)
-      .then(data => {
-        const newPoll = data.rows[0];
-        res.send(newPoll);
+      .then(() => {
+        res.send('Poll was updated successfully');
       })
       .catch (err => {
         res
@@ -44,6 +46,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
 
   return router;
 };
