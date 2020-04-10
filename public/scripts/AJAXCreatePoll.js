@@ -37,8 +37,8 @@ $(document).ready(function() {
     event.preventDefault();
     let email = $("#email").val();
     $.get("/api/users", {email: email}, function(data) {
-        user_id = data.id;
-      });
+      user_id = data.id;
+    });
 
     const $pollForm = createNewPoll();
     $('form').append($pollForm);
@@ -71,7 +71,8 @@ $(document).ready(function() {
     });
 
     $.post("/api/choices", { pollTitle, user_id, movieChoices }, function(data) {
-        window.location = `/results/${data.id}`;
+      console.log('data dentro de ajax', data.data);
+      window.location = `/results/${data.data}`;
 
     });
 
